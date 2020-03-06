@@ -39,9 +39,29 @@ def randomString(stringLength=10):
 def index():
   return render_template('index.html')
 
-@app.route('/sample')
-def sample():
-  return render_template('sample.html')
+@app.route('/apple')
+def apple():
+  return render_template('apple.html')
+
+@app.route('/delhi')
+def delhi():
+  return render_template('delhi.html')  
+
+@app.route('/justice')
+def justice():
+  return render_template('justice.html')
+
+@app.route('/train')
+def train():
+  return render_template('train.html')
+
+@app.route('/volcano')
+def volcano():
+  return render_template('volcano.html')
+
+@app.route('/law')
+def law():
+  return render_template('law.html')
 
 if __name__ == "__main__":
   app.run(debug=True)
