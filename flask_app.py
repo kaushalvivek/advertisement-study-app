@@ -39,6 +39,20 @@ def randomString(stringLength=10):
 def index():
   return render_template('index.html')
 
+@app.route('/mode')
+def mode():
+  return render_template('mode.html')
+
+@app.route('/control')
+def control():
+  mode = request.args.get('mode')
+  if mode == 1:
+    headlines = headlines_clickbait
+  else:
+    headlines = headlines_non_clickbait
+  
+  return render_template('mode.html')
+
 @app.route('/apple')
 def apple():
   return render_template('apple.html')
