@@ -2,19 +2,6 @@
 A flask application for controlled experiment on
 the attention on advertisement with and
 without clickbait healdines
-
-Models stored in model.py
-
-Flow of app:
-
-1. Welcome Screen + some introduction on survey
-2. Introduction to curiosity measure
-3. Curiosty Measure
-4. Introduction to attention measure
-5. Attention Measure
-6. Introduction to Study
-7. Study
-
 '''
 
 # imports
@@ -34,6 +21,30 @@ def randomString(stringLength=10):
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(stringLength))
 
+
+cb_headlines = {
+  'apple':"You won't believe what Apple is planning for India!",
+  'delhi':"You won't believe how Delhi is tackling open defecation!!",
+  'justice':"Justice delivered",
+  'train':"If this woman isn't the luckiest person alive, then we don't know who is",
+  'volcano':"Volcanoes in India?! This is what top scientists have to say",
+  'law':"That's the running joke among Indian entrepreneurs"
+}
+
+ncb_headlines = {
+  'apple':"Apple wants to start making iPhones in India",
+  'delhi':"Delhi mascots to blow the whistle on public defecation",
+  'justice':"Hyderabad Blasts Case: Yasin Bhatkal sentenced to death",
+  'train':"Woman evades approaching train by lying on tracks",
+  'volcano':"The Barren Island volcano, India's only live volcano, is active again",
+  'law':"Indian laws make it easier to start a company than to shut one down"
+}
+
+sequence = 0
+headlines = {}
+
+links = ['apple','delhi','justice','train','volcano','law']
+
 # app route : root
 @app.route('/')
 def index():
@@ -45,37 +56,52 @@ def mode():
 
 @app.route('/control')
 def control():
+  global sequence
+  global headlines
+  global links
   mode = request.args.get('mode')
-  if mode == 1:
-    headlines = headlines_clickbait
-  else:
-    headlines = headlines_non_clickbait
   
-  return render_template('mode.html')
+  if mode == '1':
+    headlines = cb_headlines
+    random.shuffle(links)
+  elif mode == '2':
+    headlines = ncb_headlines
+    random.shuffle(links)
+  
+
+  sequence +=1
+  if sequence <= 6:
+    return redirect('/'+links[sequence-1])
+  else:
+    return render_template('end.html')
 
 @app.route('/apple')
 def apple():
-  return render_template('apple.html')
+  return render_template('apple.html',title=headlines['apple'])
 
 @app.route('/delhi')
 def delhi():
-  return render_template('delhi.html')  
+  return render_template('delhi.html', title=headlines['delhi'])
 
 @app.route('/justice')
 def justice():
-  return render_template('justice.html')
+  return render_template('justice.html', title=headlines['justice'])
 
 @app.route('/train')
 def train():
-  return render_template('train.html')
+  return render_template('train.html', title=headlines['train'])
 
 @app.route('/volcano')
 def volcano():
-  return render_template('volcano.html')
+  return render_template('volcano.html', title=headlines['volcano'])
 
 @app.route('/law')
 def law():
-  return render_template('law.html')
+  return render_template('law.html', title=headlines['law'])
+
+@app.route('/end')
+def end():
+  return render_template('end.html')
 
 if __name__ == "__main__":
   app.run(debug=True)

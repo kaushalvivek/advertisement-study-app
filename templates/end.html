@@ -18,30 +18,19 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container text-center">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="mt-5">Hello!</h1>
-        <p class="lead">Choose mode.</p>
+        <h1 class="mt-5">Thank You!</h1>
+        <br />
+        <p class='lead'>
+          Reach out to vivek.kaushal@research.iiit.ac.in for more information.
+        </p>
+        <p class='lead'>
+          <a href="http://vivekkaushal.com">vivekkaushal.com</a>
+        </p>
       </div>
-    </div>
-    <br />
-    <div class="row">
-      <div class="col-lg-2">
-        <button type="button" class="btn btn-primary" onClick='chooseMode(1)'>Mode 1</button>
-      </div>
-      <div class="col-lg-2">
-        <button type="button" class="btn btn-primary" onClick='chooseMode(2)'>Mode 2</button>
-      </div>
-    </div>
-  </div>
 
 </body>
-<script>
-  function chooseMode(mode) {
-    url = '/control?mode=' + mode
-    window.location = url;
-  }
-</script>
 
 </HTML>
