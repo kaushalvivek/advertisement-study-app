@@ -13,8 +13,8 @@ import json
 
 # initializing the App and database
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///store.db'
-db = SQLAlchemy(app)
+# app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///store.db'
+# db = SQLAlchemy(app)
 
 # function for generation of random string
 def randomString(stringLength=10):
