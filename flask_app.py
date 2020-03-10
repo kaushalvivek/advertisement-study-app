@@ -40,7 +40,7 @@ ncb_headlines = {
   'law':"Indian laws make it easier to start a company than to shut one down"
 }
 
-sequence = 0
+sequence = 1
 headlines = {}
 
 links = ['apple','delhi','justice','train','volcano','law']
@@ -54,21 +54,25 @@ def index():
 def mode():
   return render_template('mode.html')
 
+@app.route('/mode_control')
+def mode_control():
+  print('here')
+  global headlines
+  global links
+  mode = int(request.args.get('mode'))
+  if mode % 2 == 1:
+    headlines = cb_headlines
+    random.shuffle(links)
+  else:
+    headlines = ncb_headlines
+    random.shuffle(links)
+  return redirect('/'+links[sequence-1])
+  
 @app.route('/control')
 def control():
   global sequence
   global headlines
   global links
-  mode = request.args.get('mode')
-  
-  if mode == '1':
-    headlines = cb_headlines
-    random.shuffle(links)
-  elif mode == '2':
-    headlines = ncb_headlines
-    random.shuffle(links)
-  
-
   sequence +=1
   if sequence <= 6:
     return redirect('/'+links[sequence-1])

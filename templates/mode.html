@@ -21,26 +21,30 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="mt-5">Hello!</h1>
-        <p class="lead">Choose mode.</p>
+        <h1 class="mt-5">Participant ID </h1>
       </div>
     </div>
     <br />
     <div class="row">
-      <div class="col-lg-2">
-        <button type="button" class="btn btn-primary" onClick='chooseMode(1)'>Mode 1</button>
+      <div class="col-lg-6">
+        <input type="text" class="form-control" id="participant_id" placeholder="Enter participant ID..." />
       </div>
-      <div class="col-lg-2">
-        <button type="button" class="btn btn-primary" onClick='chooseMode(2)'>Mode 2</button>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-lg-6">
+        <button class="btn btn-primary" onclick='submitform()'>Submit</button>
       </div>
     </div>
   </div>
 
 </body>
 <script>
-  function chooseMode(mode) {
-    url = '/control?mode=' + mode
-    window.location = url;
+  function submitform() {
+    var id = $('#participant_id').val();
+    console.log(id)
+    var url = '/mode_control?mode=' + id;
+    window.location = url
   }
 </script>
 
