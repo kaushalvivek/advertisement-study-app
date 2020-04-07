@@ -77,6 +77,7 @@ def control():
   if sequence <= 6:
     return redirect('/'+links[sequence-1])
   else:
+    sequence = 1
     return render_template('end.html')
 
 @app.route('/apple')
